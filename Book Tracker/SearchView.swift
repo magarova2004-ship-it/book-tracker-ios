@@ -32,6 +32,7 @@ struct SearchView: View {
                 }
             }
             .navigationTitle("Поиск книг")
+            .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: "Название или автор...")
             .onChange(of: searchText) { _, newValue in
                 guard !newValue.isEmpty else {

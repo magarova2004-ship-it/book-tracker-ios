@@ -8,8 +8,6 @@ import SwiftUI
 struct LibraryView: View {
     @Binding var books: [Book]
     @EnvironmentObject var settings: AppSettings
-    @State private var isShowingAddBook = false
-
     private var currentlyReading: Book? {
         books.first(where: { $0.status == .reading })
     }
@@ -79,20 +77,7 @@ struct LibraryView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Привет, \(settings.userName)! 👋")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button { isShowingAddBook = true } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title3)
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-            }
-            .sheet(isPresented: $isShowingAddBook) {
-                AddBookView(books: $books)
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
