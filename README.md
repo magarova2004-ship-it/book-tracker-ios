@@ -23,15 +23,9 @@
 
 ## Скриншоты
 
-> Добавьте скриншоты в папку `Screenshots/`, и они отобразятся здесь.
-
-<!--
-![Библиотека](Screenshots/library.png)
-![Поиск](Screenshots/search.png)
-![Детали книги](Screenshots/detail.png)
-![Ридер](Screenshots/reader.png)
-![Профиль](Screenshots/profile.png)
--->
+| Библиотека | Детали книги | Ридер | Профиль | Иконка |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Библиотека](Screenshots/library.png) | ![Детали книги](Screenshots/book-detail.png) | ![Ридер](Screenshots/reader.png) | ![Профиль](Screenshots/profile.png) | ![Иконка](Screenshots/app-icon.png) |
 
 ---
 
