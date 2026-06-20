@@ -1,20 +1,8 @@
-//
-//  ProfileView.swift
-//  Book Tracker
-//
-
 import SwiftUI
-
-private let emojiOptions: [String] = [
-    "📚", "🦁", "🐺", "🐻", "🌟", "🎭", "🦋", "🌸",
-    "🎨", "🎯", "🚀", "🌈", "🦉", "🐉", "🌺", "🎪",
-    "🦊", "🐸", "🦄", "🌙", "🎸", "🌊", "🍀", "🔥"
-]
 
 struct ProfileView: View {
     let books: [Book]
     @EnvironmentObject var settings: AppSettings
-    @State private var isPickingEmoji = false
     @State private var isEditingName = false
 
     private var readingCount: Int  { books.filter { $0.status == .reading }.count }
@@ -38,13 +26,8 @@ struct ProfileView: View {
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Профиль")
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $isPickingEmoji) {
-                EmojiPickerSheet(selected: $settings.userEmoji)
-            }
         }
     }
-
-    // MARK: - Gradient Header
 
     private var gradientHeader: some View {
         ZStack {
@@ -59,23 +42,19 @@ struct ProfileView: View {
             .frame(height: 240)
 
             VStack(spacing: 14) {
-                // Emoji avatar
-                Button { isPickingEmoji = true } label: {
-                    ZStack {
-                        Circle()
-                            .fill(.white.opacity(0.18))
-                            .frame(width: 100, height: 100)
-                        Text(settings.userEmoji)
-                            .font(.system(size: 58))
-                    }
-                    .overlay(
-                        Circle().stroke(.white.opacity(0.35), lineWidth: 2)
-                    )
-                    .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 4)
+                ZStack {
+                    Circle()
+                        .fill(.white.opacity(0.18))
+                        .frame(width: 100, height: 100)
+                    Image(systemName: "person.fill")
+                        .font(.system(size: 44))
+                        .foregroundColor(.white)
                 }
-                .buttonStyle(.plain)
+                .overlay(
+                    Circle().stroke(.white.opacity(0.35), lineWidth: 2)
+                )
+                .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 4)
 
-                // Name
                 if isEditingName {
                     TextField("Твоё имя", text: $settings.userName)
                         .multilineTextAlignment(.center)
@@ -101,8 +80,6 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Stats 2×2 Grid
-
     private var statsGrid: some View {
         LazyVGrid(
             columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)],
@@ -115,11 +92,8 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Settings Cards
-
     private var settingsCards: some View {
         VStack(spacing: 12) {
-            // Font size
             VStack(alignment: .leading, spacing: 12) {
                 Label("Размер шрифта в ридере", systemImage: "textformat.size")
                     .font(.subheadline).bold()
@@ -135,7 +109,6 @@ struct ProfileView: View {
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
 
-            // Dark mode
             HStack {
                 Label("Тёмная тема", systemImage: "moon.fill")
                 Spacer()
@@ -149,8 +122,6 @@ struct ProfileView: View {
         }
     }
 }
-
-// MARK: - Stat Card
 
 private struct StatCard: View {
     let icon: String
@@ -178,54 +149,6 @@ private struct StatCard: View {
         .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
         .shadow(color: color.opacity(0.08), radius: 10, x: 0, y: 3)
-    }
-}
-
-// MARK: - Emoji Picker
-
-private struct EmojiPickerSheet: View {
-    @Binding var selected: String
-    @Environment(\.dismiss) var dismiss
-
-    private let columns = Array(repeating: GridItem(.flexible()), count: 5)
-
-    var body: some View {
-        NavigationStack {
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(emojiOptions, id: \.self) { emoji in
-                    Button {
-                        selected = emoji
-                        dismiss()
-                    } label: {
-                        Text(emoji)
-                            .font(.system(size: 46))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
-                            .background(
-                                selected == emoji
-                                ? Color.blue.opacity(0.14)
-                                : Color.clear
-                            )
-                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .stroke(selected == emoji ? Color.blue.opacity(0.4) : .clear,
-                                            lineWidth: 1.5)
-                            )
-                    }
-                }
-            }
-            .padding(16)
-            .navigationTitle("Выбери аватар")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Готово") { dismiss() }
-                }
-            }
-        }
-        .presentationDetents([.medium])
-        .presentationCornerRadius(28)
     }
 }
 

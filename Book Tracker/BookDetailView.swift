@@ -1,8 +1,3 @@
-//
-//  BookDetailView.swift
-//  Book Tracker
-//
-
 import SwiftUI
 
 struct BookDetailView: View {
@@ -64,14 +59,13 @@ struct BookDetailView: View {
             .frame(height: 300)
 
             VStack(spacing: 0) {
-                Spacer().frame(height: 56) // nav bar clearance
+                Spacer().frame(height: 56)
                 BookCover(url: book.coverURL, width: 118, height: 162)
                     .shadow(color: .black.opacity(0.4), radius: 24, x: 0, y: 10)
                 Spacer().frame(height: 40)
             }
         }
     }
-
 
     private var contentCard: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -149,7 +143,6 @@ struct BookDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
 
-                // Mark progress / add to library
                 ActionButton(
                     title: isAlreadySaved ? "Отметить +10 стр. прочитанными" : "Добавить в мои книги",
                     icon: isAlreadySaved ? "plus.circle.fill" : "books.vertical.fill",
@@ -158,7 +151,6 @@ struct BookDetailView: View {
                     markProgress()
                 }
 
-                // Apple Books
                 Button(action: openAppleBooks) {
                     HStack(spacing: 10) {
                         Image(systemName: "apple.logo")
@@ -188,8 +180,6 @@ struct BookDetailView: View {
         .shadow(color: .black.opacity(0.08), radius: 20, x: 0, y: -4)
     }
 
-    // MARK: - Actions
-
     private func openAppleBooks() {
         let q = book.title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         if let url = URL(string: "https://books.apple.com/search?term=\(q)") {
@@ -208,8 +198,6 @@ struct BookDetailView: View {
     }
 }
 
-// MARK: - Meta Chip
-
 private struct MetaChip: View {
     let icon: String
     let text: String
@@ -224,8 +212,6 @@ private struct MetaChip: View {
             .clipShape(Capsule())
     }
 }
-
-// MARK: - Action Button
 
 private struct ActionButton: View {
     let title: String
@@ -253,15 +239,12 @@ private struct ActionButton: View {
     }
 }
 
-// MARK: - Buy Sheet
-
 private struct BuySheet: View {
     let bookTitle: String
     let onDismiss: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
-            // Icon header
             VStack(spacing: 16) {
                 ZStack {
                     Circle()

@@ -1,8 +1,3 @@
-//
-//  LibraryView.swift
-//  Book Tracker
-//
-
 import SwiftUI
 
 struct LibraryView: View {
@@ -37,7 +32,6 @@ struct LibraryView: View {
                     emptyStateView
                 } else {
                     List {
-                        // Currently reading card
                         if let book = currentlyReading {
                             Section {
                                 CurrentlyReadingCard(book: book)
@@ -54,7 +48,6 @@ struct LibraryView: View {
                             .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         }
 
-                        // All books
                         Section {
                             ForEach(books, id: \.id) { book in
                                 BookCard(book: book)
@@ -76,13 +69,11 @@ struct LibraryView: View {
                 }
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Привет, \(settings.userName)! 👋")
+            .navigationTitle("Привет, \(settings.userName)!")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
-
-// MARK: - Currently Reading Card
 
 private struct CurrentlyReadingCard: View {
     let book: Book
@@ -128,8 +119,6 @@ private struct CurrentlyReadingCard: View {
     }
 }
 
-// MARK: - Book Card (library row)
-
 private struct BookCard: View {
     let book: Book
 
@@ -174,8 +163,6 @@ private struct BookCard: View {
         .shadow(color: .black.opacity(0.06), radius: 10, x: 0, y: 3)
     }
 }
-
-// MARK: - Book Cover  (shared across the module)
 
 struct BookCover: View {
     let url: String?

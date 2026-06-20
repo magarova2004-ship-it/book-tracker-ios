@@ -1,8 +1,3 @@
-//
-//  AppSettings.swift
-//  Book Tracker
-//
-
 import SwiftUI
 import Combine
 

@@ -1,8 +1,3 @@
-//
-//  SearchView.swift
-//  Book Tracker
-//
-
 import SwiftUI
 
 enum SearchState {
@@ -51,8 +46,6 @@ struct SearchView: View {
             }
         }
     }
-
-    // MARK: - States
 
     private var idleView: some View {
         VStack(spacing: 28) {
@@ -140,8 +133,6 @@ struct SearchView: View {
         .scrollContentBackground(.hidden)
     }
 }
-
-// MARK: - Search Result Row
 
 private struct SearchBookRow: View {
     let book: Book

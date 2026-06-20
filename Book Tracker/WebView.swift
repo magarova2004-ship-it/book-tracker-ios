@@ -1,9 +1,3 @@
-//
-//  WebView.swift
-//  Book Tracker
-//
-//  Постраничный ридер — загружает текст через NetworkManager и показывает в SwiftUI
-
 import SwiftUI
 
 struct WebView: View {
@@ -32,8 +26,6 @@ struct WebView: View {
             await loadPages()
         }
     }
-
-    // MARK: - Top Bar
 
     private var topBar: some View {
         HStack {
@@ -87,8 +79,6 @@ struct WebView: View {
         )
     }
 
-    // MARK: - Progress Bar
-
     private var progressBar: some View {
         GeometryReader { geo in
             Rectangle()
@@ -103,8 +93,6 @@ struct WebView: View {
         }
         .frame(height: 3)
     }
-
-    // MARK: - Content
 
     @ViewBuilder
     private var content: some View {
@@ -140,11 +128,9 @@ struct WebView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .id(currentPage) // сброс скролла при смене страницы
+            .id(currentPage)
         }
     }
-
-    // MARK: - Actions
 
     private func prevPage() {
         guard currentPage > 1 else { return }

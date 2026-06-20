@@ -1,10 +1,3 @@
-//
-//  AddBookView.swift
-//  Book Tracker
-//
-//  Created by Alfiya on 14/6/26.
-//
-
 import SwiftUI
 
 struct AddBookView: View {
@@ -14,7 +7,7 @@ struct AddBookView: View {
     @State private var author: String = ""
     @State private var description: String = ""
     @State private var pageCountString: String = ""
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -49,7 +42,7 @@ struct AddBookView: View {
         }
     }
 }
+
 #Preview {
     AddBookView(books: .constant([]))
 }
-

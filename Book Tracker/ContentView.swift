@@ -1,8 +1,3 @@
-//
-//  ContentView.swift
-//  Book Tracker
-//
-
 import SwiftUI
 
 private let savedBooksKey = "saved_books"
